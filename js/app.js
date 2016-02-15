@@ -1,11 +1,10 @@
 // Enemies our player must avoid
+var gethitted = [260,200,150,100,50];
 var Enemy = function() {
     // Variables applied to each of our instances go here,
     // we've provided one for you to get started
     this.x = 10;
     this.y = 30;
-    this.width = 70;
-    this.height = 90;
     this.speed = Math.random()*2;
 
     // The image/sprite for our enemies, this uses
@@ -17,9 +16,10 @@ var Enemy = function() {
 // Parameter: dt, a time delta between ticks
 Enemy.prototype.reset = function(){
     this.x = 0;
-    this.speed = Math.random() *4;
-    this.y = Math.floor(Math.random()*(300-50));
-    console.log("reset enemys");
+    this.speed = Math.random() *3;
+    while(this.y<50)
+        this.y = Math.floor(Math.random()*(300-50));
+    //console.log("reset enemys");
 };
 Enemy.prototype.update = function(dt) {
     // You should multiply any movement by the dt parameter
@@ -29,9 +29,30 @@ Enemy.prototype.update = function(dt) {
     if(this.x>500){
         this.reset();
     }
-    console.log("enemy x= "+this.x,"enemy y="+this.y);
-    if(this.x === player.x && this.y === player.y){
-        player.reset();
+    //console.log("enemy x= "+this.x,"enemy y="+this.y);
+    if(Math.floor(this.x)+35 === player.x ||Math.floor(this.x)-10 === player.x ){
+        if(player.y<gethitted[0] && player.y>=gethitted[1]){
+            console.log(" 1 hitted! between "+gethitted[0]," and "+gethitted[1]);
+            console.log('player x = ', player.x, 'player y = ', player.y);
+            console.log("enemy x = "+this.x,"enemy y = "+this.y);
+            player.reset();
+        }else if(player.y<gethitted[1] && player.y>=gethitted[2]){
+             console.log("2 hitted! between "+gethitted[1]," and "+gethitted[2]);
+            console.log('player x = ', player.x, 'player y = ', player.y);
+            console.log("enemy x = "+this.x,"enemy y = "+this.y);
+            player.reset();
+        }else if(player.y<gethitted[2] && player.y>=gethitted[3]){
+             console.log("3 hitted! between "+gethitted[2]," and "+gethitted[3]);
+            console.log('player x = ', player.x, 'player y = ', player.y);
+            console.log("enemy x = "+this.x,"enemy y = "+this.y);
+            player.reset();
+        }else if(player.y<gethitted[3] && player.y>=gethitted[4]){
+            console.log(" 4 hitted! between "+gethitted[3]," and "+gethitted[4]);
+            console.log('player x = ', player.x, 'player y = ', player.y);
+            console.log("enemy x = "+this.x,"enemy y = "+this.y);
+            player.reset();
+        }
+
     }
 
 };
@@ -58,7 +79,7 @@ player.prototype.update = function(dt){
     if(player.y===0){
         player.reset();
     }
-    console.log('player x = ', this.x, 'player y = ', this.y);
+    console.log("movement: ",'player x = ', this.x, 'player y = ', this.y);
 }
 player.prototype.render = function(){
     ctx.drawImage(Resources.get(this.sprite),this.x,this.y);
@@ -79,14 +100,14 @@ player.prototype.handleInput = function(direction){
         if(this.x===0){
             //nothing either
         }else{
-            this.x -= 50;
+            this.x -= 100;
         }
         break;
         case'right':
         if(this.x===400){
             //DON'T MOVE >:|
         }else{
-            this.x += 50;
+            this.x += 100;
         }
         break;
     }
@@ -98,7 +119,7 @@ player.prototype.handleInput = function(direction){
 // Place the player object in a variable called player
 
 var allEnemies = [];
-for(i = 1;i<=3;i++){
+for(i = 1;i<=4;i++){
  allEnemies[i]= new Enemy();
 }
 var player = new player();
