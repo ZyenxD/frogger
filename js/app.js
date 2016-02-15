@@ -1,5 +1,5 @@
 // Enemies our player must avoid
-var gethitted = [260,200,150,100,50];
+var gethitted = [250,200,150,100,50];
 var Enemy = function() {
     // Variables applied to each of our instances go here,
     // we've provided one for you to get started
@@ -18,7 +18,7 @@ Enemy.prototype.reset = function(){
     this.x = 0;
     this.speed = Math.random() *3;
     while(this.y<50)
-        this.y = Math.floor(Math.random()*(300-50));
+        this.y = gethitted[Math.floor(Math.random()*4)];
     //console.log("reset enemys");
 };
 Enemy.prototype.update = function(dt) {
@@ -30,24 +30,29 @@ Enemy.prototype.update = function(dt) {
         this.reset();
     }
     //console.log("enemy x= "+this.x,"enemy y="+this.y);
-    if(Math.floor(this.x)+35 === player.x ||Math.floor(this.x)-10 === player.x ){
-        if(player.y<gethitted[0] && player.y>=gethitted[1]){
-            console.log(" 1 hitted! between "+gethitted[0]," and "+gethitted[1]);
+    if(Math.floor(this.x)+50 >= player.x && Math.floor(this.x)-50 <= player.x ){
+        if(player.y === gethitted[0] && this.y === gethitted[0] || player.y === gethitted[0]+30 && this.y === gethitted[0] || player.y === gethitted[0]-30 && this.y === gethitted[0]){
+            console.log(" 1 hitted! between "+gethitted[0]);
             console.log('player x = ', player.x, 'player y = ', player.y);
             console.log("enemy x = "+this.x,"enemy y = "+this.y);
             player.reset();
-        }else if(player.y<gethitted[1] && player.y>=gethitted[2]){
-             console.log("2 hitted! between "+gethitted[1]," and "+gethitted[2]);
+        }else if(player.y === gethitted[1] && this.y === gethitted[1] || player.y === gethitted[1]+30 && this.y === gethitted[1] || player.y === gethitted[1]-30 && this.y === gethitted[1]){
+             console.log("2 hitted! between "+gethitted[1]);
             console.log('player x = ', player.x, 'player y = ', player.y);
             console.log("enemy x = "+this.x,"enemy y = "+this.y);
             player.reset();
-        }else if(player.y<gethitted[2] && player.y>=gethitted[3]){
-             console.log("3 hitted! between "+gethitted[2]," and "+gethitted[3]);
+        }else if(player.y === gethitted[2] && this.y === gethitted[2] || player.y === gethitted[2]+30 && this.y === gethitted[2] || player.y === gethitted[2]-30 && this.y === gethitted[2]){
+             console.log("3 hitted! between "+gethitted[2]);
             console.log('player x = ', player.x, 'player y = ', player.y);
             console.log("enemy x = "+this.x,"enemy y = "+this.y);
             player.reset();
-        }else if(player.y<gethitted[3] && player.y>=gethitted[4]){
-            console.log(" 4 hitted! between "+gethitted[3]," and "+gethitted[4]);
+        }else if(player.y === gethitted[3] && this.y === gethitted[3] || player.y === gethitted[3]+30 && this.y === gethitted[30] || player.y === gethitted[3]-30 && this.y === gethitted[3]){
+            console.log(" 4 hitted! between "+gethitted[3]);
+            console.log('player x = ', player.x, 'player y = ', player.y);
+            console.log("enemy x = "+this.x,"enemy y = "+this.y);
+            player.reset();
+        }else if(player.y === gethitted[4] && this.y === gethitted[4] || player.y === gethitted[4]+30 && this.y === gethitted[4] || player.y === gethitted[4]-30 && this.y === gethitted[4]){
+            console.log(" 5 hitted! between "+gethitted[4]);
             console.log('player x = ', player.x, 'player y = ', player.y);
             console.log("enemy x = "+this.x,"enemy y = "+this.y);
             player.reset();
